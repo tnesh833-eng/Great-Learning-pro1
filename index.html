@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Learning</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #0ea5e9;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 5% 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .card-1 {
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .card-2 {
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+
+        .card-2 .icon-box {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            background: var(--light);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            background: var(--white);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 5rem 5%;
+            background: var(--light);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .course-img {
+            height: 200px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #94a3b8;
+            position: relative;
+        }
+
+        .course-img.tech {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+
+        .course-img.voc {
+            background: linear-gradient(135deg, #10b981, #047857);
+            color: white;
+        }
+
+        .course-img.biz {
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            color: white;
+        }
+
+        .lang-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .enroll-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .enroll-btn:hover {
+            color: var(--secondary);
+            gap: 0.75rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 5% 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+            }
+
+            .hero-content {
+                margin-bottom: 4rem;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* AI Assistant Widget */
+        .ai-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .ai-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .ai-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .ai-chat-box {
+            width: 320px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: none;
+            /* Can be toggled via JS */
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .ai-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-body {
+            padding: 20px;
+            height: 250px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .ai-message {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            margin-bottom: 10px;
+            max-width: 90%;
+        }
+
+        .ai-input-area {
+            padding: 15px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 50px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        .ai-input:focus {
+            border-color: var(--primary);
+        }
+
+        .ai-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .ai-send:hover {
+            background: var(--primary-light);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i> Great Learning
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#courses">Micro-Courses</a></li>
+            <li><a href="#resources">Resources & Updates</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="btn-primary">Start Learning</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="badge">Platform for Regional Youth</div>
+            <h1>Bridge the Gap to Your <span>Dream Career</span></h1>
+            <p>A personalized e-learning platform focusing on high-demand, vocational, and tech-driven roles. Learn
+                job-ready skills in your regional language through flexible micro-modules.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Explore Courses <i
+                        class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                <button class="btn-primary"
+                    style="background: white; color: var(--dark); border: 2px solid #e2e8f0; box-shadow: none;">Take
+                    Skill Assessment</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="../oooooo/photo-1522202176988-66273c2fd55f.jpg" alt="Students learning together">
+
+            <div class="floating-card card-1">
+                <div class="icon-box"><i class="fa-solid fa-check"></i></div>
+                <div>
+                    <h4 style="color: var(--dark); margin-bottom: 2px;">Job Ready</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">In 8 weeks</p>
+                </div>
+            </div>
+
+            <div class="floating-card card-2">
+                <div class="icon-box"><i class="fa-solid fa-language"></i></div>
+                <div>
+                    <h4 style="color: var(--dark); margin-bottom: 2px;">5+ Languages</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Learn in your native tongue</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Why Choose Great Learning?</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Tailored to address the modern industry skill gap
+                and youth unemployment.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3>Personalized Learning</h3>
+                <p style="color: var(--text-muted);">AI-driven course recommendations based on your goals, current skill
+                    level, and local job market demand.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-earth-asia"></i></div>
+                <h3>Regional Languages</h3>
+                <p style="color: var(--text-muted);">Breaking the language barrier with courses available in Hindi,
+                    Tamil, Telugu, Marathi, and Bengali.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                <h3>Micro-Skilling</h3>
+                <p style="color: var(--text-muted);">Short, bite-sized modules that fit into your schedule, focusing
+                    strictly on practical, hands-on knowledge.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h3>Industry Aligned</h3>
+                <p style="color: var(--text-muted);">Curriculum built with industry partners ensuring you learn exactly
+                    what employers are currently hiring for.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses -->
+    <section class="courses" id="courses">
+        <div class="section-header" style="text-align: center;">
+            <h2>High-Demand Micro-Courses</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Start building skills that employers are actively
+                looking for today.</p>
+        </div>
+
+        <div class="course-grid">
+            <!-- Course 1 -->
+            <div class="course-card">
+                <div class="course-img tech">
+                    <i class="fa-brands fa-python"></i>
+                    <span class="lang-tag"><i class="fa-solid fa-language"></i> English / Hindi</span>
+                </div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <span><i class="fa-regular fa-clock"></i> 4 Weeks</span>
+                        <span style="color: var(--primary);"><i class="fa-solid fa-laptop-code"></i> Tech</span>
+                    </div>
+                    <h3 class="course-title">Python for Data Analysis</h3>
+                    <p class="course-desc">Learn the fundamentals of Python and how to analyze data. A critical skill
+                        for entry-level data roles.</p>
+                    <div class="course-footer">
+                        <span style="font-weight: 700; color: var(--dark);">Free</span>
+                        <a href="#" class="enroll-btn">Enroll Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="course-card">
+                <div class="course-img voc">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span class="lang-tag"><i class="fa-solid fa-language"></i> Tamil / Telugu</span>
+                </div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <span><i class="fa-regular fa-clock"></i> 3 Weeks</span>
+                        <span style="color: #10b981;"><i class="fa-solid fa-box"></i> Vocational</span>
+                    </div>
+                    <h3 class="course-title">Logistics & Supply Chain</h3>
+                    <p class="course-desc">Master warehouse management, inventory tracking, and last-mile delivery
+                        operations.</p>
+                    <div class="course-footer">
+                        <span style="font-weight: 700; color: var(--dark);">Free</span>
+                        <a href="#" class="enroll-btn">Enroll Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="course-card">
+                <div class="course-img biz">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="lang-tag"><i class="fa-solid fa-language"></i> Hindi / Marathi</span>
+                </div>
+                <div class="course-content">
+                    <div class="course-meta">
+                        <span><i class="fa-regular fa-clock"></i> 5 Weeks</span>
+                        <span style="color: #f59e0b;"><i class="fa-solid fa-store"></i> Business</span>
+                    </div>
+                    <h3 class="course-title">Digital Retail Marketing</h3>
+                    <p class="course-desc">Learn how to manage online storefronts, run social media ads, and drive
+                        e-commerce sales.</p>
+                    <div class="course-footer">
+                        <span style="font-weight: 700; color: var(--dark);">Free</span>
+                        <a href="#" class="enroll-btn">Enroll Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources & Guidance Section -->
+    <section class="resources" id="resources" style="padding: 5rem 5%; background: var(--white);">
+        <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+            <h2>Trusted Resources & Daily Guidance</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Official government platforms, interview prep, and
+                free daily career updates for college students.</p>
+        </div>
+
+        <div class="resources-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <!-- Gov Resources -->
+            <div class="resource-card"
+                style="padding: 2.5rem; border-radius: var(--border-radius); background: #f0f9ff; border: 1px solid #bae6fd; transition: var(--transition);">
+                <h3 style="color: #0369a1; margin-bottom: 1.5rem;"><i class="fa-solid fa-building-columns"></i>
+                    Government Approved</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1.5rem;">
+                        <a href="https://www.skillindiadigital.gov.in/home" target="_blank"
+                            style="text-decoration: none; color: var(--dark); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; transition: var(--transition);"><i
+                                class="fa-solid fa-arrow-up-right-from-square" style="color: var(--primary);"></i> Skill
+                            India Digital</a>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">Official platform
+                            for skill development and certification.</p>
+                    </li>
+                    <li>
+                        <a href="https://swayam.gov.in/nc_details/NPTEL" target="_blank"
+                            style="text-decoration: none; color: var(--dark); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; transition: var(--transition);"><i
+                                class="fa-solid fa-arrow-up-right-from-square" style="color: var(--primary);"></i>
+                            Swayam (NPTEL)</a>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">Free online courses
+                            and certification by top Indian institutes.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Job Prep -->
+            <div class="resource-card"
+                style="padding: 2.5rem; border-radius: var(--border-radius); background: #fdf4ff; border: 1px solid #fbcfe8; transition: var(--transition);">
+                <h3 style="color: #a21caf; margin-bottom: 1.5rem;"><i class="fa-solid fa-briefcase"></i> Interview & Job
+                    Prep</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1.5rem;">
+                        <a href="https://www.indiabix.com/" target="_blank"
+                            style="text-decoration: none; color: var(--dark); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; transition: var(--transition);"><i
+                                class="fa-solid fa-arrow-up-right-from-square" style="color: var(--primary);"></i>
+                            IndiaBix</a>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">Platform for
+                            company job time performance guidance, aptitude, and reasoning preparation.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Daily Updates -->
+            <div class="resource-card"
+                style="padding: 2.5rem; border-radius: var(--border-radius); background: #f0fdf4; border: 1px solid #bbf7d0; transition: var(--transition);">
+                <h3 style="color: #15803d; margin-bottom: 1.5rem;"><i class="fa-solid fa-bell"></i> Free Daily Guidance
+                </h3>
+                <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 1.2rem;">Get free guidance
+                    tailored for college students. Stay updated daily on:</p>
+                <ul style="list-style: none; padding: 0; color: var(--text-muted); font-size: 0.95rem;">
+                    <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;"><i
+                            class="fa-solid fa-circle-check" style="color: #16a34a;"></i> New In-demand Skills</li>
+                    <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;"><i
+                            class="fa-solid fa-circle-check" style="color: #16a34a;"></i> College Internships</li>
+                    <li style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;"><i
+                            class="fa-solid fa-circle-check" style="color: #16a34a;"></i> Government Job Alerts</li>
+                    <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-circle-check"
+                            style="color: #16a34a;"></i> Career Mentorship</li>
+                </ul>
+                <button class="btn-primary"
+                    style="margin-top: 1.5rem; width: 100%; padding: 0.8rem; font-size: 1rem; border-radius: 8px;">Get
+                    Daily Updates</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Brand Free Courses Section -->
+    <section class="top-brands" id="brands" style="padding: 5rem 5%; background: var(--light);">
+        <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+            <h2>Learn from the Best for Free</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Day-to-day updated free courses and certifications
+                directly from top global tech brands.</p>
+        </div>
+
+        <div class="brands-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+            <!-- Google -->
+            <div class="brand-card"
+                style="background: var(--white); border-radius: var(--border-radius); padding: 2rem; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.03); transition: var(--transition);">
+                <i class="fa-brands fa-google" style="font-size: 3.5rem; color: #4285F4; margin-bottom: 1rem;"></i>
+                <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Grow with Google</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Free training and tools
+                    to grow your skills, career, or business.</p>
+                <a href="https://grow.google/intl/en_in/" target="_blank" class="btn-primary"
+                    style="display: inline-block; font-size: 0.9rem; padding: 0.6rem 1.2rem;">Enroll for Free <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Microsoft -->
+            <div class="brand-card"
+                style="background: var(--white); border-radius: var(--border-radius); padding: 2rem; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.03); transition: var(--transition);">
+                <i class="fa-brands fa-microsoft" style="font-size: 3.5rem; color: #00a4ef; margin-bottom: 1rem;"></i>
+                <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Microsoft Learn</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Discover your path with
+                    free interactive learning paths and modules.</p>
+                <a href="https://learn.microsoft.com/" target="_blank" class="btn-primary"
+                    style="display: inline-block; font-size: 0.9rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, #00a4ef, #7fba00);">Enroll
+                    for Free <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- AWS -->
+            <div class="brand-card"
+                style="background: var(--white); border-radius: var(--border-radius); padding: 2rem; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.03); transition: var(--transition);">
+                <i class="fa-brands fa-aws" style="font-size: 3.5rem; color: #FF9900; margin-bottom: 1rem;"></i>
+                <h3 style="color: var(--dark); margin-bottom: 0.5rem;">AWS Skill Builder</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Build cloud skills with
+                    600+ free digital courses from AWS experts.</p>
+                <a href="https://skillbuilder.aws/" target="_blank" class="btn-primary"
+                    style="display: inline-block; font-size: 0.9rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, #FF9900, #232F3E);">Enroll
+                    for Free <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to kickstart your career?</h2>
+        <p>Join thousands of youth who are upskilling and securing jobs in high-demand industries. Your future starts
+            today.</p>
+        <button class="btn-primary"
+            style="padding: 1rem 2.5rem; font-size: 1.2rem; background: var(--white); color: var(--dark);">Create Your
+            Free Account</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="margin-bottom: 1rem; font-size: 1.5rem; font-weight: 700; color: var(--white);">
+            <i class="fa-solid fa-graduation-cap"></i> Great Learning
+        </div>
+        <p>Addressing Skill Gaps and Youth Unemployment</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">&copy; 2026 Great Learning Project. All rights
+            reserved.</p>
+    </footer>
+
+    <!-- AI Assistant Widget -->
+    <div class="ai-widget">
+        <!-- Chat Box (Hidden by default, can be toggled) -->
+        <div class="ai-chat-box" id="aiChatBox" style="display: flex;">
+            <div class="ai-header">
+                <i class="fa-solid fa-robot"></i> Great Learning AI Guide
+            </div>
+            <div class="ai-body">
+                <p style="margin-bottom: 10px;">👋 Hi there! I'm your AI Assistant.</p>
+                <div class="ai-message">
+                    How can I help you today? Looking for a specific free course, internship update, or skill path?
+                </div>
+            </div>
+            <div class="ai-input-area">
+                <input type="text" class="ai-input" placeholder="Ask me anything...">
+                <button class="ai-send"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <!-- Toggle Button -->
+        <div class="ai-toggle"
+            onclick="document.getElementById('aiChatBox').style.display = document.getElementById('aiChatBox').style.display === 'none' ? 'flex' : 'none';">
+            <i class="fa-solid fa-message"></i>
+        </div>
+    </div>
+
+    <!-- External Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
